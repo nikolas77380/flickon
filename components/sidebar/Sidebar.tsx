@@ -1,7 +1,7 @@
 import { getTableData } from "@/lib/api/requests";
 import Table from "../table/Table";
 
-export default async function Sidebar({ type = "" }) {
+export default async function Sidebar() {
   const data = await getTableData();
   return (
     <aside
