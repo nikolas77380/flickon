@@ -6,8 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "lint": "next lint && npx prettier --check",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "prepare": "husky",
+    "format": "prettier --check --ignore-path .gitignore ."
   },
   "dependencies": {
     "@apollo/client": "^3.8.10",
@@ -32,7 +34,10 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
     "postcss": "^8",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import classes from "./page.module.css";
 import { Roboto } from "next/font/google";
-import { FormEvent } from "react";
 import Form from "./SignUpForm";
 export const metadata: Metadata = {
   title: "Створити аккаунт | Англійський футбол",

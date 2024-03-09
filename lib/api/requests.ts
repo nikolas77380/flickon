@@ -5,15 +5,15 @@ import { fixtures } from "@/mocks/fixtures";
 import { ITableItem, IResultsItem } from "@/lib/models/apiModels";
 
 export async function getTableData(): Promise<ITableItem[] | undefined> {
-  const options = {
-    method: "GET",
-    url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
-    headers: {
-      "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
-      "X-RapidAPI-Host":
-        "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
-    },
-  };
+  // const options = {
+  //   method: "GET",
+  //   url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
+  //   headers: {
+  //     "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
+  //     "X-RapidAPI-Host":
+  //       "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
+  //   },
+  // };
   try {
     //   const response = await axios.request(options);
     const preparedTableData = Object.values(tableData).map((item: any) => ({
@@ -31,15 +31,15 @@ export async function getTableData(): Promise<ITableItem[] | undefined> {
 }
 
 export async function getResultsData(): Promise<IResultsItem[] | undefined> {
-  const options = {
-    method: "GET",
-    url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
-    headers: {
-      "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
-      "X-RapidAPI-Host":
-        "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
-    },
-  };
+  // const options = {
+  //   method: "GET",
+  //   url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
+  //   headers: {
+  //     "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
+  //     "X-RapidAPI-Host":
+  //       "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
+  //   },
+  // };
   try {
     //   const response = await axios.request(options);
     const preparedData = results.Results.map((el: any): IResultsItem[] => {
@@ -65,15 +65,15 @@ export async function getResultsData(): Promise<IResultsItem[] | undefined> {
 }
 
 export async function getFixturesData(): Promise<any | undefined> {
-  const options = {
-    method: "GET",
-    url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
-    headers: {
-      "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
-      "X-RapidAPI-Host":
-        "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
-    },
-  };
+  // const options = {
+  //   method: "GET",
+  //   url: "https://heisenbug-premier-league-live-scores-v1.p.rapidapi.com/api/premierleague/table",
+  //   headers: {
+  //     "X-RapidAPI-Key": "3bc3316c2dmsh8e41b1e957eb5b0p1ba874jsn673415bd6a58",
+  //     "X-RapidAPI-Host":
+  //       "heisenbug-premier-league-live-scores-v1.p.rapidapi.com",
+  //   },
+  // };
   try {
     //   const response = await axios.request(options);
 

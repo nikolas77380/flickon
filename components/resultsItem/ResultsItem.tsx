@@ -1,5 +1,4 @@
 import { IResultsItem } from "@/lib/models/apiModels";
-import { Card } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
 export default function ResultsItem({ item }: { item: IResultsItem }) {
