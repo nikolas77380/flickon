@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Navbar } from "flowbite-react";
+import Link from "next/link";
 
 const MENU_ITEMS = [
   {
@@ -37,14 +38,14 @@ export default function Header() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        {MENU_ITEMS.map((el, index) => (
-          <Navbar.Link
-            className="text-white hover:text-secondary"
-            key={index}
+        {MENU_ITEMS.map((el) => (
+          <Link
+            key={el.title}
             href={el.href}
+            className="text-white hover:text-secondary"
           >
             {el.title}
-          </Navbar.Link>
+          </Link>
         ))}
       </Navbar.Collapse>
     </Navbar>
