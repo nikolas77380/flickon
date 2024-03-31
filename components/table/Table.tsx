@@ -12,15 +12,15 @@ export default function Table({ type = "simple", data }: ITable) {
   }
 
   return (
-              <div className="relative overflow-x-auto">
-                <div className="w-full h-10 flex justify-center items-center">
-                  <h3 className="font-bold text-header text-[]">Таблиця Ліги</h3>
-                </div>
-                <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead className="sm:text-xs md:text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      {type === "simple" &&
-                        SIMPLE_HEADER.map((el, index) => (
+    <div className="relative overflow-x-auto">
+      <div className="w-full h-10 flex justify-center items-center">
+        <h3 className="font-bold text-header text-[]">Таблиця Ліги</h3>
+      </div>
+      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="sm:text-xs md:text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            {type == "simple" &&
+              SIMPLE_HEADER.map((el, index) => (
                 <th key={index} scope="col" className="px-2 py-2">
                   {el}
                 </th>

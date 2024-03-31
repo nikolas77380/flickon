@@ -19,8 +19,8 @@ export default async function Home() {
     query: GET_ARTICLES,
   });
   const tableData = await getTableData();
-  const results = await getResultsData();
-  const fixtures = await getFixturesData();
+  const results = await getResultsData(5);
+  const fixtures = await getFixturesData(5);
 
   const date = Object.keys(fixtures?.[1])[0];
 
