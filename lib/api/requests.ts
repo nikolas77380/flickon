@@ -1,8 +1,11 @@
-import { tableData } from "@/mocks/table";
-import { results } from "@/mocks/results";
-import { fixtures } from "@/mocks/fixtures";
+'use server';
 
-import { ITableItem, IResultsItem } from "@/lib/models/apiModels";
+import { tableData } from '@/mocks/table';
+import { results } from '@/mocks/results';
+import { fixtures } from '@/mocks/fixtures';
+
+import { ITableItem, IResultsItem, IStandingsItem, SeasonInfo, Detail } from '@/lib/models/apiModels';
+import axios from 'axios';
 
 export async function getTableData(): Promise<ITableItem[] | undefined> {
   // const options = {
@@ -83,5 +86,61 @@ export async function getFixturesData(): Promise<any | undefined> {
     return preparedData;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getStandingsDataBySeasonId(seasonId: number): Promise<IStandingsItem[] | undefined> {
+  const baseURL = process.env.API_SPORTMONKS_BASE_URL;
+  const apiToken = process.env.API_TOKEN_SPORTMONKS;
+  const options = {
+    method: 'GET',
+    url: `${baseURL}/standings/seasons/${seasonId}?api_token=${apiToken}&include=participant;details`,
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    const preparedData: IStandingsItem[] = response.data.data.map((item: any) => ({
+      position: item.position,
+      points: item.points,
+      teamId: item.participant.id,
+      team: item.participant.name,
+      teamLogo: item.participant.image_path,
+      played: item.details.find((detail: Detail) => detail.type_id === 129)?.value,
+      won: item.details.find((detail: Detail) => detail.type_id === 130)?.value,
+      lost: item.details.find((detail: Detail) => detail.type_id === 132)?.value,
+      draw: item.details.find((detail: Detail) => detail.type_id === 131)?.value,
+      goalsScored: item.details.find((detail: Detail) => detail.type_id === 133)?.value,
+      goalsConceded: item.details.find((detail: Detail) => detail.type_id === 134)?.value,
+      goalDifference: item.details.find((detail: Detail) => detail.type_id === 179)?.value,
+    }));
+
+    return preparedData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSeasonDataById(seasonId: number): Promise<SeasonInfo | undefined> {
+  const baseURL = process.env.API_SPORTMONKS_BASE_URL;
+  const apiToken = process.env.API_TOKEN_SPORTMONKS;
+  const options = {
+    method: 'GET',
+    url: `${baseURL}/seasons/${seasonId}?api_token=${apiToken}&include=league:name;league.country`,
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    const { name, league } = response.data.data;
+
+    const preparedData: SeasonInfo = {
+      leagueName: league.name,
+      seasonName: name,
+      countryImage: league.country.image_path,
+    };
+    return preparedData;
+  } catch (error) {
+    console.log(error);
   }
 }

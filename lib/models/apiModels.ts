@@ -18,3 +18,32 @@ export interface IResultsItem {
   date: string;
   time?: string;
 }
+
+export interface IStandingsItem {
+  position: number;
+  points: number;
+  teamId: number;
+  team: string;
+  teamLogo: string;
+  played: number;
+  won: number;
+  lost: number;
+  draw: number;
+  goalsScored: number;
+  goalsConceded: number;
+  goalDifference: number;
+}
+
+export interface Detail {
+  id: number;
+  standing_type: string;
+  standing_id: number;
+  type_id: number;
+  value: number;
+}
+
+export interface SeasonInfo {
+  leagueName: string;
+  seasonName: string;
+  countryImage: string;
+}
