@@ -34,16 +34,20 @@ export interface IStandingsItem {
   goalDifference: number;
 }
 
-export interface Detail {
-  id: number;
-  standing_type: string;
-  standing_id: number;
-  type_id: number;
-  value: number;
-}
-
 export interface SeasonInfo {
   leagueName: string;
   seasonName: string;
   countryImage: string;
+}
+
+export interface ILeaguesItem {
+  name: string;
+  shortCode: string;
+  imagePath: string;
+  seasons: {
+    id: number;
+    name: string;
+    startingAt: string;
+    endingAt: string;
+  }[];
 }

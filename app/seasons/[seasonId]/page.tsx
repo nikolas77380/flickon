@@ -13,12 +13,17 @@ const roboto = Roboto({
   subsets: ['latin'],
 });
 
-export const SEASON_ID = 759;
+interface ISeasonsPage {
+  params: {
+    seasonId: number;
+  };
+}
 
-export const StandingsPage = async () => {
-  const seasonData = await getSeasonDataById(SEASON_ID);
+export const SeasonsPage = async ({ params }: ISeasonsPage) => {
+  const seasonId = params.seasonId;
+  const seasonData = await getSeasonDataById(seasonId);
 
-  const standingsData = await getStandingsDataBySeasonId(SEASON_ID);
+  const standingsData = await getStandingsDataBySeasonId(seasonId);
 
   return (
     <div>
@@ -33,4 +38,4 @@ export const StandingsPage = async () => {
   );
 };
 
-export default StandingsPage;
+export default SeasonsPage;
