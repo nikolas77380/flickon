@@ -2,7 +2,7 @@ import { tableData } from "@/mocks/table";
 import { results } from "@/mocks/results";
 import { fixtures } from "@/mocks/fixtures";
 
-import { ITableItem, IResultsItem } from "@/lib/models/apiModels";
+import { ITableItem, IResultsItem, apiOptions } from "@/lib/models/apiModels";
 
 export async function getTableData(): Promise<ITableItem[] | undefined> {
   // const options = {
@@ -86,3 +86,50 @@ export async function getFixturesData(): Promise<any | undefined> {
   }
 }
 
+const options: apiOptions = {
+  headers: {
+    'Content-Type': 'application/json',
+  }
+}
+
+export const getTeams = async () => {
+  const matchData = await fetch(`https://api.sportmonks.com/v3/football/standings/seasons/19735?api_token=${process.env.API_TOKEN_SPORTMONKS}&include=participant;details;form;`, options);
+  return matchData.json();
+}
+
+export const getLeagueName = async (leagueId: number) => {
+  try {
+    const response = await fetch(`https://api.sportmonks.com/v3/football/leagues/${leagueId}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data.name;
+  } catch (error) {
+    console.error('Error fetching league name:', error);
+    return null;
+  }
+}
+
+export const getSeasonName = async (seasonId: number) => {
+  try {
+    const response = await fetch(`https://api.sportmonks.com/v3/football/seasons/${seasonId}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data.name;
+  } catch (error) {
+      console.error('Error fetching season name:', error);
+      return null;
+  }
+}
+
+export const getTeamById = async (id: number) => {
+  const response = await fetch(`https://api.sportmonks.com/v3/football/teams/${id}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data.data;
+};

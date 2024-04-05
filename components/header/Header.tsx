@@ -19,6 +19,10 @@ const MENU_ITEMS = [
     title: "Розклад",
     href: "/fixtures",
   },
+  {
+    title: "Лiга",
+    href: "/league",
+  },
 ];
 
 export default function Header() {

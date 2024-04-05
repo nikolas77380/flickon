@@ -18,3 +18,29 @@ export interface IResultsItem {
   date: string;
   time?: string;
 }
+
+export type apiOptions = {
+  headers:{
+    'Content-Type': string | any,
+  }
+}
+
+export interface Detail {
+  type_id: number;
+  value: number;
+}
+
+export interface Participant {
+  id: string;
+  name: string;
+  image_path: string;
+  last_played_at: string;
+}
+
+
+export interface Team {
+  details: Detail[];
+  participant: Participant;
+  position: number;
+  points: number;
+}
