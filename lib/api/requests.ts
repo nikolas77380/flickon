@@ -85,3 +85,4 @@ export async function getFixturesData(): Promise<any | undefined> {
     console.error(error);
   }
 }
+

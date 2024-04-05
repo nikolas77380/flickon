@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: "resources.premierleague.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sportmonks.com",
+        pathname: "**",
+      },
     ],
   },
   env: {
