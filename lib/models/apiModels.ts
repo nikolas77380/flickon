@@ -35,19 +35,30 @@ export interface IStandingsItem {
 }
 
 export interface SeasonInfo {
-  leagueName: string;
-  seasonName: string;
-  countryImage: string;
+  id: number;
+  name: string;
+  leagueName?: string;
+  countryImage?: string;
+  startingAt: string;
+  endingAt: string;
 }
 
 export interface ILeaguesItem {
   name: string;
   shortCode: string;
   imagePath: string;
-  seasons: {
-    id: number;
-    name: string;
-    startingAt: string;
-    endingAt: string;
-  }[];
+  seasons: SeasonInfo[];
+}
+
+export interface IFixtureResult {
+  teamAId: number;
+  teamBId: number;
+  teamAName: string;
+  teamBName: string;
+  teamAGoals: number;
+  teamBGoals: number;
+  teamAWinner: boolean;
+  teamBWinner: boolean;
+  teamALocation: 'home' | 'away';
+  teamBLocation: 'home' | 'away';
 }

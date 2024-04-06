@@ -4,7 +4,14 @@ import { tableData } from '@/mocks/table';
 import { results } from '@/mocks/results';
 import { fixtures } from '@/mocks/fixtures';
 
-import { ITableItem, IResultsItem, IStandingsItem, SeasonInfo, ILeaguesItem } from '@/lib/models/apiModels';
+import {
+  ITableItem,
+  IResultsItem,
+  IStandingsItem,
+  SeasonInfo,
+  ILeaguesItem,
+  IFixtureResult,
+} from '@/lib/models/apiModels';
 import axios from 'axios';
 
 const baseURL = process.env.API_SPORTMONKS_BASE_URL;
@@ -131,12 +138,15 @@ export async function getSeasonDataById(seasonId: number): Promise<SeasonInfo | 
   try {
     const response = await axios.request(options);
 
-    const { name, league } = response.data.data;
+    const { id, name, league, starting_at, ending_at } = response.data.data;
 
     const preparedData: SeasonInfo = {
+      id,
+      name,
       leagueName: league.name,
-      seasonName: name,
       countryImage: league.country.image_path,
+      startingAt: starting_at,
+      endingAt: ending_at,
     };
     return preparedData;
   } catch (error) {
@@ -167,5 +177,36 @@ export async function getLeagues(): Promise<ILeaguesItem[] | undefined> {
     return preparedData;
   } catch (error) {
     console.log(error);
+  }
+}
+export async function getLatestsFixturesByTeamIdAndBySeason(
+  teamId: number,
+  seasonInfo: SeasonInfo,
+): Promise<IFixtureResult[] | undefined> {
+  const options = {
+    method: 'GET',
+    url: `${baseURL}/fixtures/between/${seasonInfo.startingAt}/${seasonInfo.endingAt}/${teamId}?api_token=${apiToken}&order=desc&per_page=5&filters=seasons:${seasonInfo.id};scoreTypes:1525&include=participants:name;scores:score&select=name`,
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    const preparedData: IFixtureResult[] = response.data.data.map((item: any) => ({
+      teamAId: item.participants[0].id,
+      teamBId: item.participants[1].id,
+      teamAName: item.participants[0].name,
+      teamBName: item.participants[1].name,
+      teamAGoals: item.scores[item.scores[0].score.participant === 'home' ? 0 : 1].score.goals,
+      teamBGoals: item.scores[item.scores[0].score.participant === 'home' ? 1 : 0].score.goals,
+      teamAWinner: item.participants[0].meta.winner,
+      teamBWinner: item.participants[1].meta.winner,
+      teamALocation: item.participants[0].meta.location,
+      teamBLocation: item.participants[1].meta.location,
+    }));
+
+    return preparedData;
+  } catch (error) {
+    console.log(error);
+    console.log(options);
   }
 }
