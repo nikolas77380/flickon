@@ -16,23 +16,29 @@ const TeamTable: React.FC<TeamTableProps> = ({ teamsDatas }) => {
               <thead className="bg-gray-500">
                 <tr className=''>
                   <th scope="col" className="px-6 py-3 pl-[7rem] text-left text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    Команди
+                    Team
                   </th>
-                  <th scope="col" className="px-6 py-3 pl-[5px] text-left text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    Позицiя
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    Балiв
+                  <th scope="col" className="px-6 py-3 text-xs font-bold text-blue-400 uppercase tracking-wider">
+                    P
                   </th>
                   <th scope="col" className="px-6 py-3 text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    З - П
+                    M
                   </th>
-                  <th scope="col" className="px-6 py-3  text-left text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    Остання гра
+                  <th scope="col" className="px-6 py-3 text-xs font-bold text-gray-200 uppercase tracking-wider">
+                    W
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-xs font-bold text-gray-200 uppercase tracking-wider">
+                    D
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-xs font-bold text-gray-200 uppercase tracking-wider">
+                    L
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-xs font-bold text-gray-200 uppercase tracking-wider">
+                    GF/GA
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-400">
                 {teamsDatas?.map((team, index) => (
                   <TeamRow key={index} teamData={teamsDatas} teamDatas={team} index={index} />
                 ))}
