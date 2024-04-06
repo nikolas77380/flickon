@@ -26,21 +26,37 @@ export type apiOptions = {
 }
 
 export interface Detail {
+  id: number;
+  standing_type: string;
+  standing_id: number;
   type_id: number;
   value: number;
 }
 
 export interface Participant {
-  id: string;
+  id: number;
+  country_id: number;
+  venue_id: number;
+  gender: string;
   name: string;
   image_path: string;
+  founded: number;
+  placeholder: boolean;
   last_played_at: string;
 }
 
 
 export interface Team {
+  id: number;
   details: Detail[];
   participant: Participant;
   position: number;
   points: number;
+  result: string;
+  league_id: number;
+  season_id: number;
+  stage_id: number;
+  group_id: number | null;
+  round_id: number;
+  standing_rule_id: number;
 }

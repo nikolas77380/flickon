@@ -7,9 +7,12 @@ interface TeamRowProps {
   teamDatas: Team;
   teamData: Team[];
   index: number;
+  countryId?: number;
+  seasonId?: number;
+  viewType?: 'short' | 'full'
 }
 
-const TeamRow: React.FC<TeamRowProps> = ({ teamDatas, index, teamData }) => {
+const TeamRow: React.FC<TeamRowProps> = ({ teamDatas, index, teamData, viewType = 'short' }) => {
 
   const goalsData = teamData?.map((team: Team) => {
     const goalsWin = team.details.find(detail => detail.type_id === 130)?.value;
