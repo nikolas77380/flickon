@@ -12,7 +12,7 @@ const LeagueHeader: React.FC<LeagueHeaderProps> = async ({ leagueId, seasonId })
     [
       getLeagueName(leagueId),
       getSeasonName(seasonId),
-    ]
+    ],
   );
 
   return (
