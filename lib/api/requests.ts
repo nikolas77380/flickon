@@ -92,14 +92,17 @@ const options: apiOptions = {
   }
 }
 
+const baseUrl = process.env.API_SPORTMONKS_BASE_URL;
+const apiToken = process.env.API_TOKEN_SPORTMONKS;
+
 export const getTeams = async () => {
-  const matchData = await fetch(`https://api.sportmonks.com/v3/football/standings/seasons/19735?api_token=${process.env.API_TOKEN_SPORTMONKS}&include=participant;details;form;`, options);
+  const matchData = await fetch(`${baseUrl}/standings/seasons/19735?api_token=${apiToken}&include=participant;details;form;`, options);
   return matchData.json();
 }
 
 export const getLeagueName = async (leagueId: number) => {
   try {
-    const response = await fetch(`https://api.sportmonks.com/v3/football/leagues/${leagueId}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+    const response = await fetch(`${baseUrl}/leagues/${leagueId}?api_token=${apiToken}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -113,7 +116,7 @@ export const getLeagueName = async (leagueId: number) => {
 
 export const getSeasonName = async (seasonId: number) => {
   try {
-    const response = await fetch(`https://api.sportmonks.com/v3/football/seasons/${seasonId}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+    const response = await fetch(`${baseUrl}/seasons/${seasonId}?api_token=${apiToken}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -126,7 +129,7 @@ export const getSeasonName = async (seasonId: number) => {
 }
 
 export const getTeamById = async (id: number) => {
-  const response = await fetch(`https://api.sportmonks.com/v3/football/teams/${id}?api_token=${process.env.API_TOKEN_SPORTMONKS}`);
+  const response = await fetch(`${baseUrl}/teams/${id}?api_token=${apiToken}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
