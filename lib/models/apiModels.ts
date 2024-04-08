@@ -21,11 +21,11 @@ export interface IResultsItem {
 
 export type apiOptions = {
   headers:{
-    'Content-Type': string | any,
+    'Content-Type': string,
   }
 }
 
-export interface Detail {
+export interface IDetail {
   id: number;
   standing_type: string;
   standing_id: number;
@@ -33,7 +33,7 @@ export interface Detail {
   value: number;
 }
 
-export interface Participant {
+export interface IParticipant {
   id: number;
   country_id: number;
   venue_id: number;
@@ -46,10 +46,10 @@ export interface Participant {
 }
 
 
-export interface Team {
+export interface ITeam {
   id: number;
-  details: Detail[];
-  participant: Participant;
+  details: IDetail[];
+  participant: IParticipant;
   position: number;
   points: number;
   result: string;

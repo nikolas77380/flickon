@@ -1,9 +1,9 @@
 import React from 'react';
-import { Team } from '@/lib/models/apiModels';
 import TeamRow from './TeamRow';
+import { ITeam } from '@/lib/models/apiModels';
 
 interface TeamTableProps {
-  teamsDatas: Team[];
+  teamsDatas: ITeam[];
 }
 
 const TeamTable: React.FC<TeamTableProps> = ({ teamsDatas }) => {

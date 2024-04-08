@@ -8,8 +8,12 @@ interface LeagueHeaderProps {
 
 const LeagueHeader: React.FC<LeagueHeaderProps> = async ({ leagueId, seasonId }) => {
 
-  const leagueName = await getLeagueName(leagueId);
-  const seasonName = await getSeasonName(seasonId);
+  const [leagueName, seasonName] = await Promise.all(
+    [
+      getLeagueName(leagueId),
+      getSeasonName(seasonId),
+    ]
+  );
 
   return (
     <div className='font-bold mb-4 ml-1'>

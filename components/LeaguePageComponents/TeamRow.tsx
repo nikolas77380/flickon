@@ -1,36 +1,25 @@
 import React from 'react';
-import { Team } from '@/lib/models/apiModels';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getGoalsData, getMatchesPlayedData, getTeamGoals, getTeamMatchesPlayed } from '@/utils/teamDataUtils.ts';
+import { ITeam } from '@/lib/models/apiModels';
 
 interface TeamRowProps {
-  teamDatas: Team;
-  teamData: Team[];
+  teamDatas: ITeam;
+  teamData: ITeam[];
   index: number;
   countryId?: number;
   seasonId?: number;
   viewType?: 'short' | 'full'
 }
 
-const TeamRow: React.FC<TeamRowProps> = ({ teamDatas, index, teamData, viewType = 'short' }) => {
+const TeamRow: React.FC<TeamRowProps> = ({ teamDatas, index, teamData }) => {
 
-  const goalsData = teamData?.map((team: Team) => {
-    const goalsWin = team.details.find(detail => detail.type_id === 130)?.value;
-    const goalsDraw = team.details.find(detail => detail.type_id === 131)?.value;
-    const goalsLost = team.details.find(detail => detail.type_id === 132)?.value;
-    const goalFor = team.details.find(detail => detail.type_id === 133)?.value;
-    const goalAgainst = team.details.find(detail => detail.type_id === 134)?.value;
-    return { teamName: team.participant.name, goalsWin, goalsDraw, goalsLost, goalFor, goalAgainst };       
-  });
+  const goalsData = getGoalsData(teamData);
+  const teamGoals = getTeamGoals(teamDatas, goalsData);
 
-  const teamGoals = goalsData.find((goal: { teamName: any; }) => goal.teamName === teamDatas.participant.name);
-
-  const matchesPlayedData = teamData?.map((team: Team) => {
-    const matchesPlayed = team.details.find(detail => detail.type_id === 129)?.value;
-    return { teamName: team.participant.name, matchesPlayed };       
-  });
-
-  const teamMatchesPlayed = matchesPlayedData.find((match: { teamName: any; }) => match.teamName === teamDatas.participant.name);
+  const matchesPlayedData = getMatchesPlayedData(teamData);
+  const teamMatchesPlayed = getTeamMatchesPlayed(teamDatas, matchesPlayedData);
 
   return (
     <tr className='bg-[#282E3A]'>
