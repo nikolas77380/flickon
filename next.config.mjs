@@ -20,6 +20,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['lucide-react'],
   env: {
     API_KEY: process.env.API_BASE_URL,
   },
