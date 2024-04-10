@@ -34,7 +34,7 @@ export const LatestGames = async ({ teamId, seasonInfo }: ILatestFiveGamesProps)
                 <Icon
                   name={iconName}
                   strokeWidth={3}
-                  className={`w-6 h-6 text-white rounded-full bg-green-700 cursor-pointer bg-${color}`}
+                  className={`w-6 h-6 text-white rounded-full cursor-pointer bg-${color}`}
                 />
               </div>
             </Tooltip>
