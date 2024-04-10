@@ -13,6 +13,7 @@ import {
   IFixtureResult,
 } from '@/lib/models/apiModels';
 import axios from 'axios';
+import { prepareFixtureResults, prepareLeaguesData, prepareStandingsData } from '../utils/dataApiParser';
 
 const baseURL = process.env.API_SPORTMONKS_BASE_URL;
 const apiToken = process.env.API_TOKEN_SPORTMONKS;
@@ -108,20 +109,7 @@ export async function getStandingsDataBySeasonId(seasonId: number): Promise<ISta
   try {
     const response = await axios.request(options);
 
-    const preparedData: IStandingsItem[] = response.data.data.map((item: any) => ({
-      position: item.position,
-      points: item.points,
-      teamId: item.participant.id,
-      team: item.participant.name,
-      teamLogo: item.participant.image_path,
-      played: item.details.find((detail: any) => detail.type_id === 129)?.value,
-      won: item.details.find((detail: any) => detail.type_id === 130)?.value,
-      lost: item.details.find((detail: any) => detail.type_id === 132)?.value,
-      draw: item.details.find((detail: any) => detail.type_id === 131)?.value,
-      goalsScored: item.details.find((detail: any) => detail.type_id === 133)?.value,
-      goalsConceded: item.details.find((detail: any) => detail.type_id === 134)?.value,
-      goalDifference: item.details.find((detail: any) => detail.type_id === 179)?.value,
-    }));
+    const preparedData: IStandingsItem[] = prepareStandingsData(response.data.data);
 
     return preparedData;
   } catch (error) {
@@ -162,17 +150,7 @@ export async function getLeagues(): Promise<ILeaguesItem[] | undefined> {
   try {
     const response = await axios.request(options);
 
-    const preparedData: ILeaguesItem[] = response.data.data.map((item: any) => ({
-      name: item.name,
-      shortCode: item.short_code,
-      imagePath: item.image_path,
-      seasons: item.seasons.map((season: any) => ({
-        id: season.id,
-        name: season.name,
-        startingAt: season.starting_at,
-        endingAt: season.ending_at,
-      })),
-    }));
+    const preparedData: ILeaguesItem[] = prepareLeaguesData(response.data.data);
 
     return preparedData;
   } catch (error) {
@@ -191,18 +169,7 @@ export async function getLatestsFixturesByTeamIdAndBySeason(
   try {
     const response = await axios.request(options);
 
-    const preparedData: IFixtureResult[] = response.data.data.map((item: any) => ({
-      teamAId: item.participants[0].id,
-      teamBId: item.participants[1].id,
-      teamAName: item.participants[0].name,
-      teamBName: item.participants[1].name,
-      teamAGoals: item.scores[item.scores[0].score.participant === 'home' ? 0 : 1].score.goals,
-      teamBGoals: item.scores[item.scores[0].score.participant === 'home' ? 1 : 0].score.goals,
-      teamAWinner: item.participants[0].meta.winner,
-      teamBWinner: item.participants[1].meta.winner,
-      teamALocation: item.participants[0].meta.location,
-      teamBLocation: item.participants[1].meta.location,
-    }));
+    const preparedData: IFixtureResult[] = prepareFixtureResults(response.data.data);
 
     return preparedData;
   } catch (error) {
