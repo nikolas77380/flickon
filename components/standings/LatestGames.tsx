@@ -1,16 +1,16 @@
 import { Tooltip } from 'flowbite-react';
 
 import { getLatestsFixturesByTeamIdAndBySeason } from '@/lib/api/requests';
-import { IFixtureResult, SeasonInfo } from '@/lib/models/apiModels';
+import { IFixtureResult, ISeasonInfo } from '@/lib/models/apiModels';
 
 import Icon from '@/components/common/Icon';
 
-interface LatestFiveGamesProps {
+interface ILatestFiveGamesProps {
   teamId: number;
-  seasonInfo: SeasonInfo;
+  seasonInfo: ISeasonInfo;
 }
 
-export const LatestGames = async ({ teamId, seasonInfo }: LatestFiveGamesProps) => {
+export const LatestGames = async ({ teamId, seasonInfo }: ILatestFiveGamesProps) => {
   const latestGames: IFixtureResult[] | undefined = await getLatestsFixturesByTeamIdAndBySeason(teamId, seasonInfo);
 
   const getBgColorAndIcon = (item: IFixtureResult): { color: string; iconName: 'check' | 'minus' | 'x' } => {

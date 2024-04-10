@@ -8,7 +8,7 @@ import {
   ITableItem,
   IResultsItem,
   IStandingsItem,
-  SeasonInfo,
+  ISeasonInfo,
   ILeaguesItem,
   IFixtureResult,
 } from '@/lib/models/apiModels';
@@ -129,7 +129,7 @@ export async function getStandingsDataBySeasonId(seasonId: number): Promise<ISta
   }
 }
 
-export async function getSeasonDataById(seasonId: number): Promise<SeasonInfo | undefined> {
+export async function getSeasonDataById(seasonId: number): Promise<ISeasonInfo | undefined> {
   const options = {
     method: 'GET',
     url: `${baseURL}/seasons/${seasonId}?api_token=${apiToken}&include=league:name;league.country`,
@@ -140,7 +140,7 @@ export async function getSeasonDataById(seasonId: number): Promise<SeasonInfo | 
 
     const { id, name, league, starting_at, ending_at } = response.data.data;
 
-    const preparedData: SeasonInfo = {
+    const preparedData: ISeasonInfo = {
       id,
       name,
       leagueName: league.name,
@@ -181,7 +181,7 @@ export async function getLeagues(): Promise<ILeaguesItem[] | undefined> {
 }
 export async function getLatestsFixturesByTeamIdAndBySeason(
   teamId: number,
-  seasonInfo: SeasonInfo,
+  seasonInfo: ISeasonInfo,
 ): Promise<IFixtureResult[] | undefined> {
   const options = {
     method: 'GET',

@@ -34,7 +34,7 @@ export interface IStandingsItem {
   goalDifference: number;
 }
 
-export interface SeasonInfo {
+export interface ISeasonInfo {
   id: number;
   name: string;
   leagueName?: string;
@@ -47,7 +47,7 @@ export interface ILeaguesItem {
   name: string;
   shortCode: string;
   imagePath: string;
-  seasons: SeasonInfo[];
+  seasons: ISeasonInfo[];
 }
 
 export interface IFixtureResult {

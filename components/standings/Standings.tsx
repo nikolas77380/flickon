@@ -1,11 +1,11 @@
-import { IStandingsItem, SeasonInfo } from '@/lib/models/apiModels';
+import { IStandingsItem, ISeasonInfo } from '@/lib/models/apiModels';
 import { Avatar, Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Link from 'next/link';
 import { LatestGames } from './LatestGames';
 
 interface ITable {
   data: IStandingsItem[] | undefined;
-  seasonInfo: SeasonInfo;
+  seasonInfo: ISeasonInfo;
 }
 
 const STANDINGS_HEAD = ['№', 'Команда', 'І', 'В', 'Н', 'П', 'З', 'П', 'Р', 'О', 'Останні матчі'];
